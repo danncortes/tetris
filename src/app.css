@@ -1,3 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html {
+    color: white;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 20px;
+}
+
 body {
-    background-color: lightblue;
+    padding: 40px;
+    background-color: #222;
+}
+
+.info-block {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.info-block .title {
+    margin-bottom: 10px;
+}
+
+.left-lines {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.center-panel {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.info-block p {
+    margin: 0;
+}
+
+.tetris-cont {
+    justify-content: center;
+    display: flex;
+}
+
+.tetris {
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(20, 30px);
+    grid-gap: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.brick {
+    border-radius: 2px;
+}
+
+.blink-brick {
+    animation-name: blink;
+    animation-duration: 0.2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
