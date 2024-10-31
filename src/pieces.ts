@@ -1,10 +1,26 @@
-import { TetrisPiece } from './types';
 
-export const pieces = {
-    1: {
+export type Colors =
+    | 'DeepSkyBlue'
+    | 'Gold'
+    | 'RoyalBlue'
+    | 'DarkOrange'
+    | 'GreenYellow'
+    | 'Crimson'
+    | 'MediumOrchid';
+
+export type Piece = {
+    name: PieceName;
+    position: number[][];
+    color: Colors;
+    orientation: 0 | 1 | 2 | 3;
+}
+
+export type PieceName = 'i' | 'o' | 'j' | 'l' | 's' | 'z' | 't';
+
+export const pieces: Omit<Piece, 'orientation'>[] = [
+    {
         name: 'i',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 3],
             [0, 4],
             [0, 5],
@@ -12,10 +28,9 @@ export const pieces = {
         ],
         color: 'DeepSkyBlue'
     },
-    2: {
+    {
         name: 'o',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 4],
             [0, 5],
             [1, 4],
@@ -23,10 +38,9 @@ export const pieces = {
         ],
         color: 'Gold'
     },
-    3: {
+    {
         name: 'j',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 3],
             [1, 3],
             [1, 4],
@@ -34,10 +48,9 @@ export const pieces = {
         ],
         color: 'RoyalBlue'
     },
-    4: {
+    {
         name: 'l',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 6],
             [1, 4],
             [1, 5],
@@ -45,10 +58,9 @@ export const pieces = {
         ],
         color: 'DarkOrange'
     },
-    5: {
+    {
         name: 's',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 4],
             [0, 5],
             [1, 3],
@@ -56,10 +68,9 @@ export const pieces = {
         ],
         color: 'GreenYellow'
     },
-    6: {
+    {
         name: 'z',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 3],
             [0, 4],
             [1, 4],
@@ -67,10 +78,9 @@ export const pieces = {
         ],
         color: 'Crimson'
     },
-    7: {
+    {
         name: 't',
-        posStateIndex: 0,
-        pos: [
+        position: [
             [0, 4],
             [1, 3],
             [1, 4],
@@ -78,195 +88,169 @@ export const pieces = {
         ],
         color: 'MediumOrchid'
     }
-} as { [key: number]: TetrisPiece };
+];
 
-export const rotationInst = {
-    i: {
-        right: [
+export const pieceOrientations: { [key in PieceName]: number[][][] } = {
+    i: [
+        [
             [-1, 2],
             [0, 1],
             [1, 0],
             [2, -1]
-        ],
-        down: [
+        ], [
             [2, -2],
             [1, -1],
             [0, 0],
             [-1, 1]
-        ],
-        left: [
+        ], [
             [-2, 1],
             [-1, 0],
             [0, -1],
             [1, -2]
-        ],
-        default: [
+        ], [
             [1, -1],
             [0, 0],
             [-1, 1],
             [-2, 2]
         ]
-    },
-    o: {
-        right: [
+    ],
+    o: [
+        [
             [0, 0],
             [0, 0],
             [0, 0],
             [0, 0]
-        ],
-        down: [
+        ], [
             [0, 0],
             [0, 0],
             [0, 0],
             [0, 0]
-        ],
-        left: [
+        ], [
             [0, 0],
             [0, 0],
             [0, 0],
             [0, 0]
-        ],
-        default: [
+        ], [
             [0, 0],
             [0, 0],
             [0, 0],
             [0, 0]
         ]
-    },
-    j: {
-        right: [
+    ],
+    j: [
+        [
             [0, 1],
             [-1, 2],
             [0, 0],
             [1, -1]
-        ],
-        down: [
+        ], [
             [1, -1],
             [1, -1],
             [0, 1],
             [0, 1]
-        ],
-        left: [
+        ], [
             [-1, 1],
             [0, 0],
             [1, -2],
             [0, -1]
-        ],
-        default: [
+        ], [
             [0, -1],
             [0, -1],
             [-1, 1],
             [-1, 1]
         ]
-    },
-    l: {
-        right: [
+    ],
+    l: [
+        [
             [0, -1],
             [0, 1],
             [1, 0],
             [1, 0]
-        ],
-        down: [
+        ], [
             [1, -1],
             [0, 0],
             [-1, 1],
             [0, -2]
-        ],
-        left: [
+        ], [
             [-1, 0],
             [-1, 0],
             [0, -1],
             [0, 1]
-        ],
-        default: [
+        ], [
             [0, 2],
             [1, -1],
             [0, 0],
             [-1, 1]
         ]
-    },
-    s: {
-        right: [
+    ],
+    s: [
+        [
             [0, 0],
             [1, -1],
             [0, 2],
             [1, 1]
-        ],
-        down: [
+        ], [
             [1, 0],
             [0, 1],
             [1, -2],
             [0, -1]
-        ],
-        left: [
+        ], [
             [-1, -1],
             [0, -2],
             [-1, 1],
             [0, 0]
-        ],
-        default: [
+        ], [
             [0, 1],
             [-1, 2],
             [0, -1],
             [-1, 0]
         ]
-    },
-    z: {
-        right: [
+    ],
+    z: [
+        [
             [0, 2],
             [1, 0],
             [0, 1],
             [1, -1]
-        ],
-        down: [
+        ], [
             [1, -2],
             [0, 0],
             [1, -1],
             [0, 1]
-        ],
-        left: [
+        ], [
             [-1, 1],
             [0, -1],
             [-1, 0],
             [0, -2]
-        ],
-        default: [
+        ], [
             [0, -1],
             [-1, 1],
             [0, 0],
             [-1, 2]
         ]
-    },
-    t: {
-        right: [
+    ],
+    t: [
+        [
             [0, 0],
             [0, 1],
             [0, 1],
             [1, -1]
-        ],
-        down: [
+        ], [
             [1, -1],
             [0, 0],
             [0, 0],
             [0, 0]
-        ],
-        left: [
+        ], [
             [-1, 1],
             [0, -1],
             [0, -1],
             [0, 0]
-        ],
-        default: [
+        ], [
             [0, 0],
             [0, 0],
             [0, 0],
             [-1, 1]
         ]
-    }
-} as {
-    [key: string]: {
-        [key: string]: any;
-    };
+    ]
 };
 
-export const piecePosStates = ['default', 'right', 'down', 'left'];
