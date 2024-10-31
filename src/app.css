@@ -18,7 +18,19 @@ body {
 }
 
 .info-block .title {
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.info-block .content {
+    font-size: 1.2rem;
+}
+
+.info-block--piece .content {
+    display: grid;
+    grid-template-columns: repeat(4, 20px);
+    grid-template-rows: repeat(2, 20px);
+    grid-gap: 3px;
 }
 
 .left-lines {
@@ -29,6 +41,7 @@ body {
 .center-panel {
     margin: 0 20px;
     text-align: center;
+    position: relative;
 }
 
 .info-block p {
@@ -40,7 +53,7 @@ body {
     display: flex;
 }
 
-.tetris {
+.tetris-wall {
     border: 2px solid black;
     display: grid;
     grid-template-columns: repeat(10, 30px);
@@ -49,24 +62,16 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.brick {
-    border-radius: 2px;
+.tetris-wall--game-over .brick {
+    opacity: 0.2;
 }
 
-.blink-brick {
-    animation-name: blink;
-    animation-duration: 0.2s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes blink {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: red;
+    z-index: 1;
 }

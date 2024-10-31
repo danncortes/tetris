@@ -6,6 +6,12 @@ const path = require('path');
 const config = {
     name: 'react-base-ts-webpack',
     entry: './src/index.tsx',
+    mode: 'development', // or 'production'
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true, // Clean the output directory before emit.
+    },
     module: {
         rules: [
             {
@@ -18,7 +24,7 @@ const config = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
+                test: /\.(png|jpe?g|gif|avif)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -44,12 +50,14 @@ const config = {
         path: path.resolve(__dirname, 'build')
     },
     optimization: {
+        usedExports: true,
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                    test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',
-                    chunks: 'all'
+                    chunks: 'all',
+                    reuseExistingChunk: true
                 }
             }
         }
@@ -59,7 +67,9 @@ const config = {
 module.exports = (env, argv) => {
     if (argv.mode === 'development') {
         config.devServer = {
-            contentBase: path.join(__dirname, 'build'),
+            static: {
+                directory: path.join(__dirname, 'build'),
+            },
             compress: true,
             port: 3001
         };
