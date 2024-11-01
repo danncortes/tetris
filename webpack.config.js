@@ -8,8 +8,8 @@ const config = {
     entry: './src/index.tsx',
     mode: 'development', // or 'production'
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'docs'),
         clean: true, // Clean the output directory before emit.
     },
     module: {
@@ -45,10 +45,6 @@ const config = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'build')
-    },
     optimization: {
         usedExports: true,
         splitChunks: {
@@ -68,7 +64,7 @@ module.exports = (env, argv) => {
     if (argv.mode === 'development') {
         config.devServer = {
             static: {
-                directory: path.join(__dirname, 'build'),
+                directory: path.join(__dirname, 'docs'),
             },
             compress: true,
             port: 3001
